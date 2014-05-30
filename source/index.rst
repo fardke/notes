@@ -24,6 +24,7 @@ Contents:
    reseau
    socks
    ssh
+   thinkpad
    tmux
    transparence
    urxvt
