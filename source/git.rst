@@ -42,15 +42,31 @@ Commande de base
 Rebase/Merge
 ------------
 
+Rebase
+~~~~~~
+
 .. code-block:: sh
 
     git checkout ma_branche
     git rebase master
 
-va mettre les commits de ma_branche à la suite de master.
+Va mettre les commits de ma_branche à la suite de master.
 
 .. figure:: _static/gitRebase.jpeg
    :align: center
+
+Pour réintégrer une branche de développement on peut utiliser le rebase
+interactif:
+
+.. code-block:: sh
+
+   git checkout ma_branch_de_dev
+   git rebase -i master
+
+Ainsi on pourra changer les logs de commit pour les cleaner.
+
+Checkout
+~~~~~~~~
 
 .. code-block:: sh
 
@@ -123,12 +139,22 @@ tig
 Merge avec vimdiff
 ------------------
 
-Configurer git pour faire un merge avec vimdiff.
+Configurer git pour faire un merge avec vimdiff. 
+
+.. note:: Nécessite git version >= 1.7.11.
+
+.. code-block:: linux-config
+
+    [diff]
+        tool = default-difftool
+    [difftool "default-difftool"]
+        cmd = vim -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE '+syntax off'
+
+
+Ensuite on fait le git diff:
 
 .. code-block:: sh
 
-    git config merge.tool vimdiff
-    git config merge.conflictstyle diff3
-    git config mergetools.prompt false
+   git difftool -d
 
-.. note:: Encore à tester.
+
